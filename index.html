@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naldo.comvocê - Loja Virtual</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="naldologo-Photoroom.png" alt="Logo da Loja" class="logo">
+        </div>
+        
+        <nav>
+            <div class="menu">
+                <a href="#" class="active">Início</a>
+            </div>
+            
+            <div class="cart-whatsapp">
+                <button class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Pedir via WhatsApp
+                </button>
+                
+                <button class="cart-btn" id="open-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Barra de categorias principal -->
+    <div class="categorias-container">
+        <div class="categorias">
+            <button class="categoria-btn active" data-categoria="todos">Todos</button>
+            <button class="categoria-btn" data-categoria="casal">Casal</button>
+            <button class="categoria-btn" data-categoria="maes">Mães</button>
+            <button class="categoria-btn" data-categoria="pai">Pai</button>
+            <button class="categoria-btn" data-categoria="matrizes-africana">Matrizes Africana</button>
+            <button class="categoria-btn" data-categoria="gospel">Gospel</button>
+            <button class="categoria-btn" data-categoria="catolica">Católica</button>
+            <button class="categoria-btn" data-categoria="signos">Signos</button>
+            <button class="categoria-btn" data-categoria="amigos">Amigos(a)</button>
+            <button class="categoria-btn" data-categoria="anime">Anime</button>
+            <button class="categoria-btn" data-categoria="professor">Professor</button>
+            <button class="categoria-btn" data-categoria="profissoes">Profissões</button>
+        </div>
+    </div>
+
+   <div class="produto-card oferta-especial anuncio-destaque" id="oferta-especial">
+    <span class="produto-categoria">Oferta</span>
+    <div class="container-imagem-anuncio">
+        <img src="img/anucios/capa01.png" class="imagem-anuncio">
+        <img src="img/anucios/capa01.png" class="selo-oferta" alt="Oferta Relâmpago">
+    </div>
+</div>
+
+    <main>
+        <!-- Banner de Ofertas -->
+        <div class="banner-ofertas" id="banner-ofertas">
+            <div class="oferta-relampago-banner">
+                <img src="img/canecas/canecas 6.jpg" alt="Oferta Relâmpago" class="selo-banner">
+                <div class="contador">⏰ Ofertas acabam em: <span id="contador-tempo">24:59:59</span></div>
+                <button class="ver-ofertas-btn" id="scroll-to-ofertas">VER OFERTAS</button>
+            </div>
+        </div>
+
+        <!-- Seção Casal -->
+        <section class="categoria-produtos" data-categoria="casal">
+            <h2 class="categoria-titulo">Casal</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Casal</span>
+                    <img src="img/canecas/canecas 5.jpg" alt="Caneca Casal" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Casal</h3>
+                        <p class="produto-preco">R$ 99,90 (par)</p>
+                        <button class="add-to-cart" data-id="c101" data-name="Caneca Casal" data-price="99.90" data-img="img/canecas/canecas 5.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="produto-card">
+                    <span class="produto-categoria">Casal</span>
+                    <img src="img/diadosnamorados/namorados 2.jpg" alt="Quadro Casal" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Quadro Casal</h3>
+                        <p class="produto-preco">R$ 79,90</p>
+                        <button class="add-to-cart" data-id="c102" data-name="Quadro Casal" data-price="79.90" data-img="img/diadosnamorados/namorados 2.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Mães -->
+        <section class="categoria-produtos" data-categoria="maes">
+            <h2 class="categoria-titulo">Mães</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Mães</span>
+                    <img src="img/graficarapida/camisa01.jpg" alt="Camisa para Mães" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Camisa para Mães</h3>
+                        <p class="produto-preco">R$ 59,90</p>
+                        <button class="add-to-cart" data-id="m101" data-name="Camisa para Mães" data-price="59.90" data-img="img/graficarapida/camisa01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="produto-card">
+                    <span class="produto-categoria">Mães</span>
+                    <img src="img/graficarapida/bady01.jpg" alt="Body Maternidade" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Body Maternidade</h3>
+                        <p class="produto-preco">R$ 49,90</p>
+                        <button class="add-to-cart" data-id="m102" data-name="Body Maternidade" data-price="49.90" data-img="img/graficarapida/bady01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Pai -->
+        <section class="categoria-produtos" data-categoria="pai">
+            <h2 class="categoria-titulo">Pai</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Pai</span>
+                    <img src="img/canecas/canecas 1.jpg" alt="Caneca Pai" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Pai</h3>
+                        <p class="produto-preco">R$ 39,90</p>
+                        <button class="add-to-cart" data-id="p101" data-name="Caneca Pai" data-price="39.90" data-img="img/canecas/canecas 1.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="produto-card">
+                    <span class="produto-categoria">Pai</span>
+                    <img src="img/graficarapida/camisa01.jpg" alt="Camisa Pai" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Camisa Pai</h3>
+                        <p class="produto-preco">R$ 69,90</p>
+                        <button class="add-to-cart" data-id="p102" data-name="Camisa Pai" data-price="69.90" data-img="img/graficarapida/camisa01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Matrizes Africana -->
+        <section class="categoria-produtos" data-categoria="matrizes-africana">
+            <h2 class="categoria-titulo">Matrizes Africana</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Matrizes Africana</span>
+                    <img src="img/canecas/canecas 2.jpg" alt="Caneca Orixás" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Orixás</h3>
+                        <p class="produto-preco">R$ 44,90</p>
+                        <button class="add-to-cart" data-id="ma101" data-name="Caneca Orixás" data-price="44.90" data-img="img/canecas/canecas 2.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="produto-card">
+                    <span class="produto-categoria">Matrizes Africana</span>
+                    <img src="img/diadosnamorados/namorados 1.jpg" alt="Quadro Orixás" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Quadro Orixás</h3>
+                        <p class="produto-preco">R$ 89,90</p>
+                        <button class="add-to-cart" data-id="ma102" data-name="Quadro Orixás" data-price="89.90" data-img="img/diadosnamorados/namorados 1.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Gospel -->
+        <section class="categoria-produtos" data-categoria="gospel">
+            <h2 class="categoria-titulo">Gospel</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Gospel</span>
+                    <img src="img/canecas/canecas 4.jpg" alt="Caneca Gospel" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Gospel</h3>
+                        <p class="produto-preco">R$ 39,90</p>
+                        <button class="add-to-cart" data-id="g101" data-name="Caneca Gospel" data-price="39.90" data-img="img/canecas/canecas 4.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="produto-card">
+                    <span class="produto-categoria">Gospel</span>
+                    <img src="img/diadosnamorados/namorados 3.jpg" alt="Quadro Gospel" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Quadro Gospel</h3>
+                        <p class="produto-preco">R$ 79,90</p>
+                        <button class="add-to-cart" data-id="g102" data-name="Quadro Gospel" data-price="79.90" data-img="img/diadosnamorados/namorados 3.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Católica -->
+        <section class="categoria-produtos" data-categoria="catolica">
+            <h2 class="categoria-titulo">Católica</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Católica</span>
+                    <img src="img/canecas/canecas 6.jpg" alt="Caneca Católica" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Católica</h3>
+                        <p class="produto-preco">R$ 39,90</p>
+                        <button class="add-to-cart" data-id="ca101" data-name="Caneca Católica" data-price="39.90" data-img="img/canecas/canecas 6.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Signos -->
+        <section class="categoria-produtos" data-categoria="signos">
+            <h2 class="categoria-titulo">Signos</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Signos</span>
+                    <img src="img/graficarapida/vinil01.jpg" alt="Adesivo Signos" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Adesivo Signos</h3>
+                        <p class="produto-preco">R$ 19,90</p>
+                        <button class="add-to-cart" data-id="s101" data-name="Adesivo Signos" data-price="19.90" data-img="img/graficarapida/vinil01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Amigos(a) -->
+        <section class="categoria-produtos" data-categoria="amigos">
+            <h2 class="categoria-titulo">Amigos(a)</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Amigos</span>
+                    <img src="img/graficarapida/copolong01.jpg" alt="Copo Amigos" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Copo Amigos</h3>
+                        <p class="produto-preco">R$ 34,90</p>
+                        <button class="add-to-cart" data-id="a101" data-name="Copo Amigos" data-price="34.90" data-img="img/graficarapida/copolong01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Anime -->
+        <section class="categoria-produtos" data-categoria="anime">
+            <h2 class="categoria-titulo">Anime</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Anime</span>
+                    <img src="img/graficarapida/vinil02.jpg" alt="Adesivo Anime" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Adesivo Anime</h3>
+                        <p class="produto-preco">R$ 14,90</p>
+                        <button class="add-to-cart" data-id="an101" data-name="Adesivo Anime" data-price="14.90" data-img="img/graficarapida/vinil02.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Professor -->
+        <section class="categoria-produtos" data-categoria="professor">
+            <h2 class="categoria-titulo">Professor</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Professor</span>
+                    <img src="img/graficarapida/pote01.jpg" alt="Caneca Professor" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Professor</h3>
+                        <p class="produto-preco">R$ 39,90</p>
+                        <button class="add-to-cart" data-id="pr101" data-name="Caneca Professor" data-price="39.90" data-img="img/graficarapida/pote01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Profissões -->
+        <section class="categoria-produtos" data-categoria="profissoes">
+            <h2 class="categoria-titulo">Profissões</h2>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <span class="produto-categoria">Profissões</span>
+                    <img src="img/graficarapida/talheres01.jpg" alt="Caneca Profissões" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Profissões</h3>
+                        <p class="produto-preco">R$ 39,90</p>
+                        <button class="add-to-cart" data-id="pf101" data-name="Caneca Profissões" data-price="39.90" data-img="img/graficarapida/talheres01.jpg">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Carrinho de Compras -->
+    <div class="cart-overlay" id="cart-overlay">
+        <div class="cart-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart-message">Seu carrinho está vazio</p>
+        </div>
+        
+        <div class="cart-total">
+            Total: <span id="cart-total">R$ 0,00</span>
+        </div>
+        
+        <div class="dados-cliente">
+            <h3>Seus Dados</h3>
+            <div class="form-group">
+                <label for="cliente-nome">Nome Completo:</label>
+                <input type="text" id="cliente-nome" placeholder="Digite seu nome" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente-endereco">Endereço:</label>
+                <input type="text" id="cliente-endereco" placeholder="Rua, Nº, Bairro" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente-telefone">WhatsApp:</label>
+                <input type="tel" id="cliente-telefone" placeholder="(21) 98765-4321" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente-observacoes">Observações:</label>
+                <textarea id="cliente-observacoes" placeholder="Ponto de referência, etc."></textarea>
+            </div>
+        </div>
+
+        
+<button class="clear-cart-btn" id="clear-cart">
+    <i class="fas fa-trash"></i> Limpar Carrinho
+</button>
+
+        <button class="checkout-btn" id="checkout-btn">
+            <i class="fab fa-whatsapp"></i> Finalizar via WhatsApp
+        </button>
+    </div>
+    
+    <footer>
+        <p>&copy; 2008 Naldo.comvocê. Todos os direitos reservados.</p>
+        
+        <div class="footer-links">
+            <a href="#">Sobre Nós</a>
+            <a href="#">Contato</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Serviço</a>
+        </div>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

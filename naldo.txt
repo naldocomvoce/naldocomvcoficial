@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naldo.comvocê </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --amarelo-primario: #FFD700;
+            --amarelo-secundario: #FFEB3B;
+            --vermelho-primario: #E53935;
+            --vermelho-secundario: #F44336;
+            --branco: #FFFFFF;
+            --preto: #212121;
+            --cinza: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--preto);
+        }
+        
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, var(--amarelo-primario), var(--vermelho-primario));
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            max-width: 300px;
+            height: auto;
+        }
+        
+        /* Navegação */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background-color: var(--branco);
+        }
+        
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: var(--preto);
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .menu a:hover, .menu a.active {
+            background-color: var(--amarelo-primario);
+            color: var(--preto);
+        }
+        
+        .cart-whatsapp {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .whatsapp-btn, .cart-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        .cart-btn {
+            background-color: var(--vermelho-primario);
+            color: white;
+            border: none;
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--amarelo-primario);
+            color: var(--preto);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Categorias */
+        .categorias {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px 5%;
+            gap: 10px;
+            background-color: var(--branco);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .categoria-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .categoria-btn:hover, .categoria-btn.active {
+            background-color: var(--vermelho-primario);
+            color: white;
+        }
+        
+        /* Conteúdo Principal */
+        main {
+            padding: 40px 5%;
+        }
+        
+        .categoria-titulo {
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--amarelo-primario);
+            color: var(--vermelho-primario);
+        }
+        
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .produto-card {
+            background-color: var(--branco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .produto-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .produto-imagem {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .produto-info {
+            padding: 20px;
+        }
+        
+        .produto-titulo {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--preto);
+        }
+        
+        .produto-preco {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--vermelho-primario);
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--amarelo-primario);
+            border: none;
+            border-radius: 5px;
+            color: var(--preto);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--amarelo-secundario);
+        }
+        
+        .produto-categoria {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--vermelho-primario);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Carrinho de Compras */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--branco);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-overlay.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--cinza);
+        }
+        
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            font-weight: bold;
+            color: var(--vermelho-primario);
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--cinza);
+            cursor: pointer;
+        }
+        
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            margin: 20px 0;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Rodapé */
+        footer {
+            background: linear-gradient(135deg, var(--vermelho-primario), var(--amarelo-primario));
+            color: white;
+            text-align: center;
+            padding: 30px 5%;
+            margin-top: 50px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <!-- Substitua pelo seu logo -->
+            <img src="seu-logo.png" alt="Logo da Loja" class="logo">
+        </div>
+        
+        <nav>
+            <div class="menu">
+                <a href="#" class="active">Início</a>
+                <a href="#">Ofertas</a>
+                <a href="#">Contato</a>
+            </div>
+            
+            <div class="cart-whatsapp">
+                <button class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Pedir via WhatsApp
+                </button>
+                
+                <button class="cart-btn" id="open-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Navegação por categorias -->
+    <div class="categorias">
+        <button class="categoria-btn active" data-categoria="todos">Todos</button>
+        <button class="categoria-btn" data-categoria="canecas">Canecas</button>
+        <button class="categoria-btn" data-categoria="camisas">Camisas</button>
+        <button class="categoria-btn" data-categoria="dia-namorados">Dia dos Namorados</button>
+        <button class="categoria-btn" data-categoria="bazar">Bazar</button>
+        <button class="categoria-btn" data-categoria="papelaria">Papelaria</button>
+        <button class="categoria-btn" data-categoria="eletronicos">Eletrônicos</button>
+    </div>
+    
+    <main>
+        <!-- Seção de Canecas -->
+        <section class="categoria-produtos" data-categoria="canecas">
+            <h2 class="categoria-titulo">Canecas Personalizadas</h2>
+            <div class="produtos-grid">
+                <!-- Caneca 1 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Canecas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Caneca+1" alt="Caneca Café Premium" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Café Premium</h3>
+                        <p class="produto-preco">R$ 39,90</p>
+                        <button class="add-to-cart" data-id="101" data-name="Caneca Café Premium" data-price="39.90" data-img="https://via.placeholder.com/300x300?text=Caneca+1">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Caneca 2 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Canecas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Caneca+2" alt="Caneca Funny Cats" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Funny Cats</h3>
+                        <p class="produto-preco">R$ 34,90</p>
+                        <button class="add-to-cart" data-id="102" data-name="Caneca Funny Cats" data-price="34.90" data-img="https://via.placeholder.com/300x300?text=Caneca+2">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Caneca 3 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Canecas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Caneca+3" alt="Caneca Programador" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Programador</h3>
+                        <p class="produto-preco">R$ 42,90</p>
+                        <button class="add-to-cart" data-id="103" data-name="Caneca Programador" data-price="42.90" data-img="https://via.placeholder.com/300x300?text=Caneca+3">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Caneca 4 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Canecas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Caneca+4" alt="Caneca Amor de Mãe" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Amor de Mãe</h3>
+                        <p class="produto-preco">R$ 37,90</p>
+                        <button class="add-to-cart" data-id="104" data-name="Caneca Amor de Mãe" data-price="37.90" data-img="https://via.placeholder.com/300x300?text=Caneca+4">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção de Camisas -->
+        <section class="categoria-produtos" data-categoria="camisas">
+            <h2 class="categoria-titulo">Camisas Estilosas</h2>
+            <div class="produtos-grid">
+                <!-- Camisa 1 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Camisas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Camisa+1" alt="Camisa Básica Branca" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Camisa Básica Branca</h3>
+                        <p class="produto-preco">R$ 59,90</p>
+                        <button class="add-to-cart" data-id="201" data-name="Camisa Básica Branca" data-price="59.90" data-img="https://via.placeholder.com/300x300?text=Camisa+1">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Camisa 2 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Camisas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Camisa+2" alt="Camisa Listrada Vermelha" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Camisa Listrada Vermelha</h3>
+                        <p class="produto-preco">R$ 69,90</p>
+                        <button class="add-to-cart" data-id="202" data-name="Camisa Listrada Vermelha" data-price="69.90" data-img="https://via.placeholder.com/300x300?text=Camisa+2">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Camisa 3 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Camisas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Camisa+3" alt="Camisa Rock Vintage" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Camisa Rock Vintage</h3>
+                        <p class="produto-preco">R$ 79,90</p>
+                        <button class="add-to-cart" data-id="203" data-name="Camisa Rock Vintage" data-price="79.90" data-img="https://via.placeholder.com/300x300?text=Camisa+3">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Camisa 4 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Camisas</span>
+                    <img src="https://via.placeholder.com/300x300?text=Camisa+4" alt="Camisa Esportiva Preta" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Camisa Esportiva Preta</h3>
+                        <p class="produto-preco">R$ 89,90</p>
+                        <button class="add-to-cart" data-id="204" data-name="Camisa Esportiva Preta" data-price="89.90" data-img="https://via.placeholder.com/300x300?text=Camisa+4">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Dia dos Namorados -->
+        <section class="categoria-produtos" data-categoria="dia-namorados">
+            <h2 class="categoria-titulo">Especial Dia dos Namorados</h2>
+            <div class="produtos-grid">
+                <!-- Produto 1 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Dia dos Namorados</span>
+                    <img src="https://via.placeholder.com/300x300?text=Namorados+1" alt="Caixa Presente Coração" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caixa Presente Coração</h3>
+                        <p class="produto-preco">R$ 49,90</p>
+                        <button class="add-to-cart" data-id="301" data-name="Caixa Presente Coração" data-price="49.90" data-img="https://via.placeholder.com/300x300?text=Namorados+1">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Dia dos Namorados</span>
+                    <img src="https://via.placeholder.com/300x300?text=Namorados+2" alt="Caneca Casal Personalizada" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caneca Casal Personalizada</h3>
+                        <p class="produto-preco">R$ 89,90</p>
+                        <button class="add-to-cart" data-id="302" data-name="Caneca Casal Personalizada" data-price="89.90" data-img="https://via.placeholder.com/300x300?text=Namorados+2">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Dia dos Namorados</span>
+                    <img src="https://via.placeholder.com/300x300?text=Namorados+3" alt="Kit Romance" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Kit Romance (Chocolate + Vinho)</h3>
+                        <p class="produto-preco">R$ 129,90</p>
+                        <button class="add-to-cart" data-id="303" data-name="Kit Romance (Chocolate + Vinho)" data-price="129.90" data-img="https://via.placeholder.com/300x300?text=Namorados+3">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Dia dos Namorados</span>
+                    <img src="https://via.placeholder.com/300x300?text=Namorados+4" alt="Pelúcia Coração" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Pelúcia Coração</h3>
+                        <p class="produto-preco">R$ 79,90</p>
+                        <button class="add-to-cart" data-id="304" data-name="Pelúcia Coração" data-price="79.90" data-img="https://via.placeholder.com/300x300?text=Namorados+4">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Bazar -->
+        <section class="categoria-produtos" data-categoria="bazar">
+            <h2 class="categoria-titulo">Bazar</h2>
+            <div class="produtos-grid">
+                <!-- Produto 1 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Bazar</span>
+                    <img src="https://via.placeholder.com/300x300?text=Bazar+1" alt="Jogo de Copos" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Jogo de Copos 6 peças</h3>
+                        <p class="produto-preco">R$ 59,90</p>
+                        <button class="add-to-cart" data-id="401" data-name="Jogo de Copos 6 peças" data-price="59.90" data-img="https://via.placeholder.com/300x300?text=Bazar+1">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Bazar</span>
+                    <img src="https://via.placeholder.com/300x300?text=Bazar+2" alt="Toalha de Mesa" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Toalha de Mesa Retrô</h3>
+                        <p class="produto-preco">R$ 89,90</p>
+                        <button class="add-to-cart" data-id="402" data-name="Toalha de Mesa Retrô" data-price="89.90" data-img="https://via.placeholder.com/300x300?text=Bazar+2">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Bazar</span>
+                    <img src="https://via.placeholder.com/300x300?text=Bazar+3" alt="Jogo de Talheres" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Jogo de Talheres Inox</h3>
+                        <p class="produto-preco">R$ 129,90</p>
+                        <button class="add-to-cart" data-id="403" data-name="Jogo de Talheres Inox" data-price="129.90" data-img="https://via.placeholder.com/300x300?text=Bazar+3">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Bazar</span>
+                    <img src="https://via.placeholder.com/300x300?text=Bazar+4" alt="Panela de Pressão" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Panela de Pressão 5L</h3>
+                        <p class="produto-preco">R$ 179,90</p>
+                        <button class="add-to-cart" data-id="404" data-name="Panela de Pressão 5L" data-price="179.90" data-img="https://via.placeholder.com/300x300?text=Bazar+4">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Papelaria -->
+        <section class="categoria-produtos" data-categoria="papelaria">
+            <h2 class="categoria-titulo">Papelaria</h2>
+            <div class="produtos-grid">
+                <!-- Produto 1 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Papelaria</span>
+                    <img src="https://via.placeholder.com/300x300?text=Papelaria+1" alt="Caderno Espiral" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Caderno Espiral 200 folhas</h3>
+                        <p class="produto-preco">R$ 19,90</p>
+                        <button class="add-to-cart" data-id="501" data-name="Caderno Espiral 200 folhas" data-price="19.90" data-img="https://via.placeholder.com/300x300?text=Papelaria+1">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Papelaria</span>
+                    <img src="https://via.placeholder.com/300x300?text=Papelaria+2" alt="Kit Canetas Coloridas" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Kit Canetas Coloridas 12 cores</h3>
+                        <p class="produto-preco">R$ 29,90</p>
+                        <button class="add-to-cart" data-id="502" data-name="Kit Canetas Coloridas 12 cores" data-price="29.90" data-img="https://via.placeholder.com/300x300?text=Papelaria+2">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Papelaria</span>
+                    <img src="https://via.placeholder.com/300x300?text=Papelaria+3" alt="Mochila Escolar" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Mochila Escolar Resistente</h3>
+                        <p class="produto-preco">R$ 129,90</p>
+                        <button class="add-to-cart" data-id="503" data-name="Mochila Escolar Resistente" data-price="129.90" data-img="https://via.placeholder.com/300x300?text=Papelaria+3">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Papelaria</span>
+                    <img src="https://via.placeholder.com/300x300?text=Papelaria+4" alt="Estojo Completo" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Estojo Completo com Materiais</h3>
+                        <p class="produto-preco">R$ 49,90</p>
+                        <button class="add-to-cart" data-id="504" data-name="Estojo Completo com Materiais" data-price="49.90" data-img="https://via.placeholder.com/300x300?text=Papelaria+4">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção Eletrônicos -->
+        <section class="categoria-produtos" data-categoria="eletronicos">
+            <h2 class="categoria-titulo">Eletrônicos</h2>
+            <div class="produtos-grid">
+                <!-- Produto 1 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Eletrônicos</span>
+                    <img src="https://via.placeholder.com/300x300?text=Eletronicos+1" alt="Fone Bluetooth" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Fone Bluetooth Sem Fio</h3>
+                        <p class="produto-preco">R$ 159,90</p>
+                        <button class="add-to-cart" data-id="601" data-name="Fone Bluetooth Sem Fio" data-price="159.90" data-img="https://via.placeholder.com/300x300?text=Eletronicos+1">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Eletrônicos</span>
+                    <img src="https://via.placeholder.com/300x300?text=Eletronicos+2" alt="Carregador Portátil" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Carregador Portátil 10000mAh</h3>
+                        <p class="produto-preco">R$ 129,90</p>
+                        <button class="add-to-cart" data-id="602" data-name="Carregador Portátil 10000mAh" data-price="129.90" data-img="https://via.placeholder.com/300x300?text=Eletronicos+2">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Eletrônicos</span>
+                    <img src="https://via.placeholder.com/300x300?text=Eletronicos+3" alt="Smartwatch" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Smartwatch Inteligente</h3>
+                        <p class="produto-preco">R$ 299,90</p>
+                        <button class="add-to-cart" data-id="603" data-name="Smartwatch Inteligente" data-price="299.90" data-img="https://via.placeholder.com/300x300?text=Eletronicos+3">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="produto-card">
+                    <span class="produto-categoria">Eletrônicos</span>
+                    <img src="https://via.placeholder.com/300x300?text=Eletronicos+4" alt="Mouse Gamer" class="produto-imagem">
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">Mouse Gamer RGB</h3>
+                        <p class="produto-preco">R$ 149,90</p>
+                        <button class="add-to-cart" data-id="604" data-name="Mouse Gamer RGB" data-price="149.90" data-img="https://via.placeholder.com/300x300?text=Eletronicos+4">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Carrinho de Compras -->
+    <div class="cart-overlay" id="cart-overlay">
+        <div class="cart-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        
+        <div class="cart-items" id="cart-items">
+            <!-- Itens do carrinho serão adicionados aqui dinamicamente -->
+            <p class="empty-cart-message">Seu carrinho está vazio</p>
+        </div>
+        
+        <div class="cart-total">
+            Total: <span id="cart-total">R$ 0,00</span>
+        </div>
+        
+        <button class="checkout-btn" id="checkout-btn">
+            <i class="fab fa-whatsapp"></i> Finalizar via WhatsApp
+        </button>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Sua Loja Virtual. Todos os direitos reservados.</p>
+        
+        <div class="footer-links">
+            <a href="#">Sobre Nós</a>
+            <a href="#">Contato</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Serviço</a>
+        </div>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+    
+    <script>
+        // Variáveis globais
+        let cart = [];
+        const cartOverlay = document.getElementById('cart-overlay');
+        const openCartBtn = document.getElementById('open-cart');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+        const cartCountElement = document.querySelector('.cart-count');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const categoriaBtns = document.querySelectorAll('.categoria-btn');
+        const categoriasProdutos = document.querySelectorAll('.categoria-produtos');
+        
+        // Abrir/fechar carrinho
+        openCartBtn.addEventListener('click', () => {
+            cartOverlay.classList.add('active');
+        });
+        
+        closeCartBtn.addEventListener('click', () => {
+            cartOverlay.classList.remove('active');
+        });
+        
+        // Adicionar ao carrinho
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                const img = button.getAttribute('data-img');
+                
+                addToCart(id, name, price, img);
+            });
+        });
+        
+        // Função para adicionar item ao carrinho
+        function addToCart(id, name, price, img) {
+            // Verifica se o item já está no carrinho
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    img,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            cartOverlay.classList.add('active');
+        }
+        
+        // Função para remover item do carrinho
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+        
+        // Função para atualizar o carrinho
+        function updateCart() {
+            // Atualiza a contagem do carrinho
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+            
+            // Atualiza os itens do carrinho
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-message">Seu carrinho está vazio</p>';
+            } else {
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.className = 'cart-item';
+                    cartItemElement.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <p class="cart-item-price">R$ ${item.price.toFixed(2)} x ${item.quantity} = R$ ${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item" data-id="${item.id}">&times;</button>
+                    `;
+                    cartItemsContainer.appendChild(cartItemElement);
+                });
+                
+                // Adiciona eventos aos botões de remover
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        removeFromCart(id);
+                    });
+                });
+            }
+            
+            // Atualiza o total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalElement.textContent = `R$ ${total.toFixed(2)}`;
+        }
+        
+        // Finalizar pedido via WhatsApp
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            let message = `Olá, gostaria de fazer um pedido:\n\n`;
+            
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            message += `\nTotal: R$ ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}`;
+            message += `\n\nMeus dados:\nNome: \nEndereço: \nTelefone: `;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/552198834627?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+        
+        // Filtro por categorias
+        categoriaBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Atualiza botão ativo
+                categoriaBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const categoria = btn.getAttribute('data-categoria');
+                
+                // Mostra/oculta categorias
+                categoriasProdutos.forEach(secao => {
+                    if (categoria === 'todos' || secao.getAttribute('data-categoria') === categoria) {
+                        secao.style.display = 'block';
+                    } else {
+                        secao.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
