@@ -1,0 +1,5 @@
+n=1
+for file in *.png; do
+    mv "$file" $(printf "cod%03d.png" "$n")
+    n=$((n+1))
+done
