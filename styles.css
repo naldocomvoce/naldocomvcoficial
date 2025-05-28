@@ -343,14 +343,36 @@ main {
     color: var(--cinza);
 }
 
-.cart-items {
-    margin-bottom: 20px;
+/* Remover itens do carrinho*/
+.cart-item-remove{
+    border: none;
+    background-color: white;
+    color: #ff3333;
+    text-align: center;
+    font-size: 50px;
+    padding: 1px;
+    margin: 5px;
+    
 }
+
+.cart-item-remove:hover{
+    animation: remove 100ms linear forwards;
+}
+
+@keyframes remove {
+    100%{
+       color: #ff0000;
+       transform: scale(1.2);
+    }    
+}
+
+
 
 .cart-item {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 15px;
-    padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
 
