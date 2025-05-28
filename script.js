@@ -420,3 +420,161 @@ async function uploadImage(file) {
     return await fileRef.getDownloadURL();
 }
 
+// Configuração do Firebase (substitua com SEUS dados)
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_PROJETO.firebaseapp.com",
+  projectId: "SEU_PROJETO",
+  storageBucket: "SEU_PROJETO.appspot.com",
+  messagingSenderId: "SEU_SENDER_ID",
+  appId: "SEU_APP_ID"
+};
+
+// Inicializa o Firebase
+firebase.initializeApp(firebaseConfig);
+const storage = firebase.storage();
+const db = firebase.firestore();
+
+// Elementos (mantenha os mesmos do código anterior)
+const btnLogin = document.getElementById('btn-login');
+const productForm = document.getElementById('product-form');
+// ... (todos os outros elementos)
+
+// Autenticação
+btnLogin.addEventListener('click', (e) => {
+  const password = document.getElementById('senha').value;
+  
+  if(password === "Elid.2009@@") {
+    loginSection.style.display = 'none';
+    productSection.style.display = 'block';
+    loadProducts();
+  } else {
+    showStatus("Senha incorreta!", "error");
+  }
+});
+
+// Upload de Imagem PROFISSIONAL
+productForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const file = imageUpload.files[0];
+  if (!file) {
+    showStatus("Selecione uma imagem!", "error");
+    return;
+  }
+
+  try {
+    // 1. Faz upload da imagem
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(`produtos/${Date.now()}_${file.name}`);
+    const uploadTask = await fileRef.put(file);
+    
+    // 2. Pega a URL da imagem
+    const imageUrl = await uploadTask.ref.getDownloadURL();
+    
+    // 3. Salva os dados no Firestore
+    await db.collection("produtos").add({
+      category: document.getElementById('category').value,
+      code: document.getElementById('code').value,
+      name: document.getElementById('name').value,
+      price: parseFloat(document.getElementById('price').value),
+      stock: parseInt(document.getElementById('stock').value) || 1,
+      imageUrl: imageUrl,
+      description: document.getElementById('description').value,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    
+    showStatus("✅ Produto cadastrado com sucesso!", "success");
+    productForm.reset();
+    imagePreview.style.display = 'none';
+    loadProducts();
+    
+  } catch (error) {
+    console.error("Erro:", error);
+    showStatus("Erro ao cadastrar produto", "error");
+  }
+});
+
+// Carrega produtos
+async function loadProducts() {
+  try {
+    const snapshot = await db.collection("produtos")
+      .orderBy("createdAt", "desc")
+      .get();
+    
+    productListContainer.innerHTML = snapshot.docs.map(doc => {
+      const product = doc.data();
+      return `
+        <div class="product-card">
+          <img src="${product.imageUrl}" class="product-image">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <div>
+              <span class="category-tag">${formatCategory(product.category)}</span>
+              <span class="category-tag">Cód: ${product.code}</span>
+              <span class="category-tag">R$ ${product.price.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error("Erro ao carregar produtos:", error);
+  }
+}
+
+// Função para carregar produtos no site principal
+function loadProducts() {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    
+    products.forEach(product => {
+        const categorySection = document.querySelector(`[data-categoria="${product.category}"] .produtos-grid`);
+        if (categorySection) {
+            // VERIFICA SE O PRODUTO JÁ EXISTE PARA NÃO DUPLICAR
+            if (!document.querySelector(`[data-id="${product.category}-${product.code}"]`)) {
+                categorySection.innerHTML += `
+                    <div class="produto-card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p>R$ ${product.price.toFixed(2)}</p>
+                        <button class="add-to-cart" 
+                                data-id="${product.category}-${product.code}" 
+                                data-name="${product.name}" 
+                                data-price="${product.price}" 
+                                data-img="${product.image}">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                `;
+            }
+        }
+    });
+    
+    // Atualiza os listeners dos botões
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', addToCartHandler);
+    });
+}
+
+// Função para adicionar ao carrinho (AGORA COM IMAGEM)
+function addToCartHandler(e) {
+    const btn = e.target;
+    const product = {
+        id: btn.getAttribute('data-id'),
+        name: btn.getAttribute('data-name'),
+        price: parseFloat(btn.getAttribute('data-price')),
+        img: btn.getAttribute('data-img'), // BASE64 ou URL
+        quantity: 1
+    };
+    
+    addToCart(product);
+}
+
+// Monitora mudanças no localStorage
+window.addEventListener('storage', () => {
+    loadProducts();
+});
+
+// Carrega os produtos quando a página abre
+document.addEventListener('DOMContentLoaded', loadProducts);

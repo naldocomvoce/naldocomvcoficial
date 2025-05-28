@@ -1204,6 +1204,10 @@
         </div>
     </footer>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script src="script.js"></script>
 
     
@@ -1228,6 +1232,15 @@
             alert("Feitiço falhou! Senha incorreta ✨");
         }
     }
+</script>
+
+<script>
+    // Atualiza a página quando novos produtos são adicionados
+    window.addEventListener('message', function(e) {
+        if (e.data.type === 'newProduct') {
+            location.reload();
+        }
+    });
 </script>
 
 </body>

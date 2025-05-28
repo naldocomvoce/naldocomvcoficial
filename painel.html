@@ -372,42 +372,47 @@
             }
         });
 
-        // Cadastro de Produto
-        productForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+           // Modifique a função de cadastro no seu painel.html
+productForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!imageUpload.files[0]) {
+        showStatus('Selecione uma imagem!', 'error');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const product = {
+            category: document.getElementById('category').value,
+            code: document.getElementById('code').value,
+            name: document.getElementById('name').value,
+            price: parseFloat(document.getElementById('price').value.replace(',', '.')),
+            stock: parseInt(document.getElementById('stock').value) || 1,
+            // AGORA USAMOS DIRECTAMENTE A URL BASE64
+            image: e.target.result, // Isso já é uma string Base64
+            description: document.getElementById('description').value,
+            date: new Date().toLocaleString('pt-BR')
+        };
+        
+        // Salva no localStorage como BASE64
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+        
+        showStatus('✅ Produto cadastrado!', 'success');
+        productForm.reset();
+        imagePreview.style.display = 'none';
+        loadProducts();
+        
+        // ATUALIZA O SITE AUTOMATICAMENTE (opcional)
+        if (window.opener) {
+            window.opener.postMessage({type: 'newProduct'}, '*');
+        }
+    };
+    reader.readAsDataURL(imageUpload.files[0]);
+});
             
-            if (!imageUpload.files[0]) {
-                showStatus('Por favor, selecione uma imagem para o produto!', 'error');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const product = {
-                    category: document.getElementById('category').value,
-                    code: document.getElementById('code').value,
-                    name: document.getElementById('name').value,
-                    price: parseFloat(document.getElementById('price').value.replace(',', '.')),
-                    stock: parseInt(document.getElementById('stock').value) || 1,
-                    image: e.target.result,
-                    description: document.getElementById('description').value,
-                    date: new Date().toLocaleString('pt-BR')
-                };
-                
-                // Salva no localStorage
-                let products = JSON.parse(localStorage.getItem('products')) || [];
-                products.push(product);
-                localStorage.setItem('products', JSON.stringify(products));
-                
-                // Feedback
-                showStatus('✅ Produto cadastrado com sucesso!', 'success');
-                productForm.reset();
-                imagePreview.style.display = 'none';
-                loadProducts();
-            };
-            
-            reader.readAsDataURL(imageUpload.files[0]);
-        });
 
         // Carrega produtos cadastrados
         function loadProducts() {
