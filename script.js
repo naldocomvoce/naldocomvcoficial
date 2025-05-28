@@ -96,18 +96,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function addToCart(id, name, price, img) {
+    function addToCart(product) {
         // Verificar se o item já está no carrinho
         const existingItem = cart.find(item => item.id === id);
         
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
-            cart.push({
-                id,
-                name,
-                price,
-                img,
+            card.push({
+                id: product.id,
+                name: product.name,
+                price: price,
+                img: product.img,
                 quantity: 1
             });
         }
@@ -125,22 +125,28 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function adjustQuantity(id, change) {
         const item = cart.find(item => item.id === id);
-        if (item) {
-            item.quantity += chan
-            ge;
-            
-            // Remover item se quantidade for zero ou menos
-            if (item.quantity <= 0) {
-                removeFromCart(id);
-            } else {
-                saveCartToLocalStorage();
-                updateCart();
-            }
+       
+        //adicionar item
+        if (change === 'adicionar') {
+            item.quantity++;
+        }
+
+        // remover ite
+        if (change === 'remover' ){
+            item.quantity--;
+        }
+
+        // Remover item se quantidade for zero ou menos
+        if (item.quantity <=0) {
+            removeFromCart(id);
+        } else {
+            saveCartToLocalStorage();
+            updateCart();
         }
     }
     
+    
     function clearCart() {
-        if (cart.length === 0) return;
         
         if (confirm('Tem certeza que deseja limpar seu carrinho?')) {
             cart = [];
@@ -148,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCart();
             showNotification('Carrinho limpo com sucesso!', 'success');
         }
+        if (cart.length === 0) return;
     }
     
     function updateCart() {
@@ -182,8 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                 cartItems.appendChild(cartItem);
             });
-            
-            // Adicionar event listeners usando delegation
+        }
+         // Adicionar event listeners usando delegation
             cartItems.addEventListener('click', function(e) {
                 // Remover item
                 if (e.target.classList.contains('cart-item-remove')) {
@@ -191,14 +198,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 // Diminuir quantidade
                 else if (e.target.classList.contains('decrease')) {
-                    adjustQuantity(e.target.getAttribute('data-id'), 1);
+                    adjustQuantity(e.target.getAttribute('data-id'),'remover');
                 }
                 // Aumentar quantidade
                 else if (e.target.classList.contains('increase')) {
-                    adjustQuantity(e.target.getAttribute('data-id'), 1);
+                    adjustQuantity(e.target.getAttribute('data-id'),'adicionar');
                 }
             });
-        }
         
         // Atualizar total
         updateCartTotal();
