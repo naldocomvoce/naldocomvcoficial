@@ -321,6 +321,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Mostrar categoria "Todos" por padrão
+
+    
     filterProducts('todos');
 });
 
@@ -420,15 +422,6 @@ async function uploadImage(file) {
     return await fileRef.getDownloadURL();
 }
 
-// Configuração do Firebase (substitua com SEUS dados)
-const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJETO",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SEU_APP_ID"
-};
 
 
 // Função para adicionar ao carrinho (AGORA COM IMAGEM)
@@ -469,4 +462,34 @@ function addToCart(product) {
     console.log("Preço convertido:", price); // Para debug
 }
 
- 
+ // Função para fechar o anúncio
+function closeAd() {
+  const adContainer = document.querySelector('.ad-container');
+  adContainer.style.display = 'none';
+  
+  // Opcional: Armazenar no localStorage que o usuário fechou o anúncio
+  localStorage.setItem('adClosed', 'true');
+}
+
+// Função para verificar a categoria atual
+function checkCurrentCategory() {
+
+  const currentCategory = 'todos'; 
+  
+  const adContainer = document.querySelector('.ad-container');
+  
+  // Verificar se o anúncio foi fechado pelo usuário
+  const adClosed = localStorage.getItem('adClosed') === 'true';
+  
+  // Mostrar apenas se for a categoria "todos" e não foi fechado
+  if (currentCategory === 'todos' && !adClosed) {
+    adContainer.style.display = 'block';
+  } else {
+    adContainer.style.display = 'none';
+  }
+}
+
+// Chamar a função quando a página carregar
+window.addEventListener('DOMContentLoaded', checkCurrentCategory);
+
+

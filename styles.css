@@ -1222,3 +1222,76 @@ body.categoria-todos #carrossel-container,
     margin-bottom: 10px;
 }
 
+/* Estilo do container do anúncio */
+.ad-container {
+  display: none; /* Inicialmente oculto */
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Quando estiver na categoria "todos" */
+.ad-container[data-category="todos"] {
+  display: block;
+}
+
+/* Estilo do banner do anúncio */
+.ad-banner {
+  position: relative;
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Botão de fechar */
+.ad-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.ad-close:hover {
+  opacity: 1;
+}
+
+/* Conteúdo do anúncio */
+.ad-content {
+  padding: 15px;
+}
+
+.ad-title {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+}
+
+.ad-description {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+}
+
+.ad-button {
+  display: inline-block;
+  background-color: white;
+  color: #ff0000;
+  padding: 10px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.ad-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
