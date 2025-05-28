@@ -458,7 +458,8 @@ footer {
     color: white;
     text-align: center;
     padding: 30px 5%;
-    margin-top:150px;
+    position: relative;
+    margin-top: 20%;
 }
 
 .footer-links {
