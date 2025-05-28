@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearCartBtn = document.getElementById('clear-cart');
     const categoriaBtns = document.querySelectorAll('.categoria-btn');
     const categoriasProdutos = document.querySelectorAll('.categoria-produtos');
-    const addToCartBtns = document.querySelectorAll('.add-to-cart');
     const scrollToOfertasBtn = document.getElementById('scroll-to-ofertas');
     
     // Inicializar contador de ofertas
@@ -22,6 +21,28 @@ document.addEventListener('DOMContentLoaded', function() {
     closeCartBtn.addEventListener('click', closeCart);
     checkoutBtn.addEventListener('click', finalizarPedidoWhatsApp);
     clearCartBtn.addEventListener('click', clearCart);
+    
+    // Usar event delegation para botões de adicionar ao carrinho
+    document.addEventListener('click', function(e) {
+        // Verificar se o clique foi em um botão de adicionar ao carrinho
+        if (e.target.classList.contains('add-to-cart')) {
+            const btn = e.target;
+            const id = btn.getAttribute('data-id');
+            const name = btn.getAttribute('data-name');
+            const price = parseFloat(btn.getAttribute('data-price'));
+            const img = btn.getAttribute('data-img');
+            
+            addToCart(id, name, price, img);
+            
+            // Feedback visual
+            btn.textContent = 'Adicionado!';
+            btn.style.backgroundColor = '#25D366';
+            setTimeout(() => {
+                btn.textContent = 'Adicionar ao Carrinho';
+                btn.style.backgroundColor = '#333';
+            }, 1000);
+        }
+    });
     
     // Filtro de categorias
     categoriaBtns.forEach(btn => {
@@ -41,26 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Adicionar ao carrinho
-    addToCartBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            const name = btn.getAttribute('data-name');
-            const price = parseFloat(btn.getAttribute('data-price'));
-            const img = btn.getAttribute('data-img');
-            
-            addToCart(id, name, price, img);
-            
-            // Feedback visual
-            btn.textContent = 'Adicionado!';
-            btn.style.backgroundColor = '#25D366';
-            setTimeout(() => {
-                btn.textContent = 'Adicionar ao Carrinho';
-                btn.style.backgroundColor = '#333';
-            }, 1000);
-        });
-    });
-    
     // Scroll para ofertas
     if (scrollToOfertasBtn) {
         scrollToOfertasBtn.addEventListener('click', () => {
@@ -74,11 +75,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Funções
     function filterProducts(categoria) {
+        const ofertaEspecial = document.getElementById('oferta-especial');
+        
         if (categoria === 'todos') {
+            // Mostrar todos os produtos e a oferta especial
             categoriasProdutos.forEach(section => {
                 section.style.display = 'block';
             });
+            if (ofertaEspecial) ofertaEspecial.style.display = 'block';
         } else {
+            // Esconder a oferta especial e mostrar apenas a categoria selecionada
+            if (ofertaEspecial) ofertaEspecial.style.display = 'none';
             categoriasProdutos.forEach(section => {
                 if (section.getAttribute('data-categoria') === categoria) {
                     section.style.display = 'block';
@@ -174,23 +181,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 cartItems.appendChild(cartItem);
             });
             
-            // Adicionar event listeners
-            document.querySelectorAll('.cart-item-remove').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    removeFromCart(btn.getAttribute('data-id'));
-                });
-            });
-            
-            document.querySelectorAll('.decrease').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    adjustQuantity(btn.getAttribute('data-id'), -1);
-                });
-            });
-            
-            document.querySelectorAll('.increase').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    adjustQuantity(btn.getAttribute('data-id'), 1);
-                });
+            // Adicionar event listeners usando delegation
+            cartItems.addEventListener('click', function(e) {
+                // Remover item
+                if (e.target.classList.contains('cart-item-remove')) {
+                    removeFromCart(e.target.getAttribute('data-id'));
+                }
+                // Diminuir quantidade
+                else if (e.target.classList.contains('decrease')) {
+                    adjustQuantity(e.target.getAttribute('data-id'), -1);
+                }
+                // Aumentar quantidade
+                else if (e.target.classList.contains('increase')) {
+                    adjustQuantity(e.target.getAttribute('data-id'), 1);
+                }
             });
         }
         
@@ -320,36 +324,99 @@ document.addEventListener('DOMContentLoaded', function() {
     filterProducts('todos');
 });
 
-function filterProducts(categoria) {
-    const ofertaEspecial = document.getElementById('oferta-especial');
-    
-    if (categoria === 'todos') {
-        // Mostrar todos os produtos e a oferta especial
-        categoriasProdutos.forEach(section => {
-            section.style.display = 'block';
-        });
-        ofertaEspecial.style.display = 'block';
-    } else {
-        // Esconder a oferta especial e mostrar apenas a categoria selecionada
-        ofertaEspecial.style.display = 'none';
-        categoriasProdutos.forEach(section => {
-            if (section.getAttribute('data-categoria') === categoria) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
-        });
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('add-to-cart')) {
+        const id = e.target.getAttribute('data-id');
+        console.log("✅ Item adicionado - ID:", id); // Verifique no console (F12)
     }
-}
+});
 
+setTimeout(() => {
+  cartOverlay.classList.add('active');
+  console.log("Carrinho deveria estar visível agora!");
+}, 2000);
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Elementos
+  const cartOverlay = document.getElementById('cart-overlay');
+  const openCartBtn = document.getElementById('open-cart');
+  const closeCartBtn = document.getElementById('close-cart');
+  
+  // Abrir/Fechar Carrinho
+  openCartBtn.addEventListener('click', () => cartOverlay.classList.add('active'));
+  closeCartBtn.addEventListener('click', () => cartOverlay.classList.remove('active'));
+  
 
-    
-   
-    filterProducts('todos');
-    
-    
-    const ofertaEspecial = document.getElementById('oferta-especial');
-    ofertaEspecial.style.display = 'block';
 });
+
+// Função para gerar IDs únicos (caso necessário)
+function generateUniqueId(prefix) {
+    return prefix + '-' + Math.floor(Math.random() * 10000);
+}
+
+// Modifique a função addToCart:
+function addToCart(id, name, price, img) {
+    // DEBUG: Verifique no console
+    console.log('Adicionando:', {id, name, price, img});
+    
+    // Verifica se o ID é único
+    if (!id || id === '') {
+        id = generateUniqueId('prod');
+        console.warn('ID ausente! Gerando:', id);
+    }
+
+    const existingItem = cart.find(item => item.id === id);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: id,
+            name: name,
+            price: price,
+            img: img,
+            quantity: 1
+        });
+    }
+    
+    saveCartToLocalStorage();
+    updateCart();
+}
+
+console.log('Carrinho atual:', JSON.parse(localStorage.getItem('cart')));
+
+
+function carregarProdutos() {
+    const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+    
+    produtos.forEach(prod => {
+        const categoriaSection = document.querySelector(`[data-categoria="${prod.categoria}"] .produtos-grid`);
+        if (categoriaSection) {
+            categoriaSection.innerHTML += `
+                <div class="produto-card">
+                    <img src="${prod.imagem}" alt="${prod.nome}">
+                    <h3>${prod.nome}</h3>
+                    <p>R$ ${prod.preco}</p>
+                    <button class="add-to-cart" 
+                            data-id="${prod.categoria}-${prod.codigo}" 
+                            data-name="${prod.nome}" 
+                            data-price="${prod.preco}" 
+                            data-img="${prod.imagem}">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            `;
+        }
+    });
+}
+
+// Execute quando a página carregar
+window.addEventListener('DOMContentLoaded', carregarProdutos);
+
+async function uploadImage(file) {
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child(`produtos/${Date.now()}_${file.name}`);
+    await fileRef.put(file);
+    return await fileRef.getDownloadURL();
+}
+
