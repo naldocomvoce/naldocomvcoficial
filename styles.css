@@ -821,7 +821,7 @@ body {
     border-radius: 10px;
     margin: 20px 5%;
     display: none; /* Inicialmente escondido */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(230, 223, 223, 0.15);
 }
 
 .oferta-relampago-banner {
