@@ -1201,44 +1201,7 @@
         </div>
     </footer>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
     <script src="script.js"></script>
-
-    
-<a href="painel.html" 
-   style="position:fixed; bottom:10px; right:10px; color:transparent;"
-   title="Painel Admin">
-   🔑
-</a>
-
-
-<button onclick="acessarPainel()" 
-        style="background:none; border:none; cursor:pointer; position:fixed; bottom:20px; right:20px;">
-    🧙♂️
-</button>
-
-<script>
-    function acessarPainel() {
-        const senha = prompt("Digite a senha mágica:");
-        if (senha === "Elid.2009@@") {
-            window.location.href = "painel.html";
-        } else {
-            alert("Feitiço falhou! Senha incorreta ✨");
-        }
-    }
-</script>
-
-<script>
-    // Atualiza a página quando novos produtos são adicionados
-    window.addEventListener('message', function(e) {
-        if (e.data.type === 'newProduct') {
-            location.reload();
-        }
-    });
-</script>
 
 </body>
 </html>
