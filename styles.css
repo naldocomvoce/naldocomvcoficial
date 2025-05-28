@@ -457,9 +457,10 @@ footer {
     background: linear-gradient(135deg, var(--vermelho-primario), var(--amarelo-primario));
     color: white;
     text-align: center;
+    font-size: 12pt;
     padding: 30px 5%;
     position: relative;
-    margin-top: 20%;
+    margin-top: 22%;
 }
 
 .footer-links {

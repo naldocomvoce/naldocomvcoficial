@@ -126,7 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function adjustQuantity(id, change) {
         const item = cart.find(item => item.id === id);
         if (item) {
-            item.quantity += change;
+            item.quantity += chan
+            ge;
             
             // Remover item se quantidade for zero ou menos
             if (item.quantity <= 0) {
@@ -165,19 +166,20 @@ document.addEventListener('DOMContentLoaded', function() {
             cart.forEach(item => {
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <img src="${item.img}" alt="${item.name}" class="cart-item-img">
-                    <div class="cart-item-info">
-                        <h4 class="cart-item-title">${item.name}</h4>
-                        <p class="cart-item-price">R$ ${(item.price * item.quantity).toFixed(2)}</p>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn decrease" data-id="${item.id}">-</button>
-                            <span class="quantity-value">${item.quantity}</span>
-                            <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                cartItem.innerHTML =
+                    `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <p class="cart-item-price">R$ ${(item.price * item.quantity).toFixed(2)}</p>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                                <span class="quantity-value">${item.quantity}</span>
+                                <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                            </div>
                         </div>
-                    </div>
-                    <button class="cart-item-remove" data-id="${item.id}">&times;</button>
-                `;
+                        <button class="cart-item-remove" data-id="${item.id}">&times;</button>
+                    `;
                 cartItems.appendChild(cartItem);
             });
             
@@ -189,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 // Diminuir quantidade
                 else if (e.target.classList.contains('decrease')) {
-                    adjustQuantity(e.target.getAttribute('data-id'), -1);
+                    adjustQuantity(e.target.getAttribute('data-id'), 1);
                 }
                 // Aumentar quantidade
                 else if (e.target.classList.contains('increase')) {
