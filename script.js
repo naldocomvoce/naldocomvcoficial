@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mensagem += `Obrigado pelo seu pedido!`;
         
         // Abrir WhatsApp
-        window.open(`https://wa.me/5521988304627?text=${mensagem}`, '_blank');
+        window.open(`https://wa.me/5521974827907?text=${mensagem}`, '_blank');
         
         // Limpar carrinho após finalização
         cart = [];
