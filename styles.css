@@ -9,6 +9,7 @@
 }
 
 * {
+    scroll-behavior: smooth;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,19 +23,46 @@ body {
 
 /* Cabeçalho */
 header {
+    position: fixed;
+    width:2vh;
     background: linear-gradient(135deg, var(--amarelo-primario), var(--vermelho-primario));
     padding: 15px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    top: 0;          /* Gruda no topo */
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000; 
 }
 
 .logo-container {
-    text-align: center;
-    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px 0;
 }
 
 .logo {
     max-width: 300px;
     height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+#inicio {
+    transition: 10s;
+}
+
+.whatsAppECarrinho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    bottom: 1px;
 }
 
 /* Navegação */
@@ -65,19 +93,11 @@ nav {
     color: var(--preto);
 }
 
-.cart-whatsapp {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
 .whatsapp-btn, .cart-btn {
     padding: 10px 20px;
     border-radius: 30px;
     font-weight: bold;
-    display: flex;
     align-items: center;
-    gap: 8px;
     transition: all 0.3s ease;
 }
 
@@ -117,15 +137,24 @@ nav {
 
 /* Container de categorias */
 .categorias-container {
+    position: relative;
+    bottom: -20px;
+    left: -30px;
+    width: 110%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background-color: var(--branco);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* Categorias */
+
 .categorias {
     display: flex;
     overflow-x: auto;
-    padding: 15px 5%;
+    padding: 10px 5%;
     gap: 10px;
 }
 
@@ -177,6 +206,8 @@ nav {
 
 /* Conteúdo Principal */
 main {
+    position: relative;
+    top: 145px;
     padding: 40px 5%;
 }
 
