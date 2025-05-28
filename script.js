@@ -578,3 +578,21 @@ window.addEventListener('storage', () => {
 
 // Carrega os produtos quando a página abre
 document.addEventListener('DOMContentLoaded', loadProducts);
+
+// Função para converter preços (aceita "30,00", "R$ 30.00", etc)
+function parsePrice(price) {
+    return parseFloat(price.toString()
+        .replace('R$', '')  // Remove R$
+        .replace(',', '.')  // Substitui vírgula por ponto
+        .trim());           // Remove espaços
+}
+
+// Modifique sua função addToCart para usar:
+function addToCart(product) {
+    const price = parsePrice(product.price); // Usa a nova função
+    
+    // Restante do seu código...
+    console.log("Preço convertido:", price); // Para debug
+}
+
+ 
