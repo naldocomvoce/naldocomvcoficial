@@ -1045,6 +1045,7 @@ body.categoria-todos #carrossel-container,
     border-radius: 5px;
     cursor: pointer;
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s;
