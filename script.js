@@ -145,16 +145,16 @@ const filtroPorCategoria = {
             const dataCategoriaFiltro = e.target.getAttribute('data-categoria');
             
             for(const sectionCategoriaArray of this.sectionCategoria){
+               
                 if(sectionCategoriaArray.getAttribute('data-categoria') === dataCategoriaFiltro){
                     sectionCategoriaArray.style.display = 'block';
-                    console.log(sectionCategoriaArray.style.display)
+                  
                 }else{
                      sectionCategoriaArray.style.display = 'none';
                     }
              }
 
         },
-
 
 }
 
