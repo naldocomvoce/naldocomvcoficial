@@ -45,7 +45,7 @@ header {
 .logo-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     padding: 10px 0;
 }
@@ -55,17 +55,8 @@ header {
     height: auto;
     margin: 0;
     padding: 0;
-    animation: logoMove alternate linear infinite 1s ;
 }
  
-@keyframes logoMove {
-    0% {
-        transform: scale(1)
-    }
-    100%{
-        transform: scale(1.1);
-    }
-}
 
 .whatsAppECarrinho {
     width: 30%;

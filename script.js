@@ -126,6 +126,21 @@ const Products = {
     }
 };
 
+
+//========================= FILTRO POR CATEGORIA ======================
+
+const filtroPorCategoria = {
+
+        btnActive : document.getElementsByClassName('active'),
+
+        removerActive() {
+            
+            this.btnActive.classList.remove('active')
+        },
+
+        adicionarActive(e) { e.target.classList.add('active')},
+}
+
 // ========================== MAIN ==========================
 document.addEventListener('DOMContentLoaded', () => {
     Products.load();
@@ -158,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
             Cart.adjustQuantity(id, -1);
         }
     });
+    document.getElementById('filtroPorCategoria').addEventListener('click',() => filtroPorCategoria.removerActive());
+    document.getElementById('filtroPorCategoria').addEventListener('click',(e) => filtroPorCategoria.adicionarActive(e))
 
     document.getElementById('open-cart').addEventListener('click', () => UI.cartOverlay.classList.add('active'));
     document.getElementById('close-cart').addEventListener('click', () => UI.cartOverlay.classList.remove('active'));
