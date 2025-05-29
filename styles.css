@@ -18,7 +18,7 @@
 
 @keyframes relord {
     0%{ transform: rotate(90deg);}
-    100%{ transform: rotate(0deg);}   
+    100%{ transform: rotate(0deg);}
 }
 
 body {
@@ -29,17 +29,17 @@ body {
 /* Cabeçalho */
 header {
     position: fixed;
-    width:2vh;
+    width:2vh; /* Isso parece ser um erro, 2vh para largura é muito pequeno, talvez fosse 100vw? Deixei como estava no original, mas verifique. */
     background:rgb(250, 216, 106);
     padding: 15px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    top: 0;          /* Gruda no topo */
+    top: 0;
     left: 0;
-    width: 100%;
+    width: 100%; /* Redefinido aqui novamente, o anterior de 2vh será sobrescrito */
     color: white;
-    padding: 15px;
+    padding: 15px; /* Redefinido aqui novamente */
     text-align: center;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .logo-container {
@@ -56,7 +56,6 @@ header {
     margin: 0;
     padding: 0;
 }
- 
 
 .whatsAppECarrinho {
     width: 30%;
@@ -156,6 +155,10 @@ nav {
 }
 
 /* Categorias */
+
+.categoria-produtos{
+  display: block;
+}
 
 .categorias {
     display: flex;
@@ -337,6 +340,9 @@ main {
     font-size: 24px;
     cursor: pointer;
     color: var(--cinza);
+    position: absolute; /* Posição absoluta para o botão de fechar dentro do overlay */
+    top: 10px;
+    right: 10px;
 }
 
 /* Remover itens do carrinho*/
@@ -345,10 +351,9 @@ main {
     background-color: white;
     color: #ff3333;
     text-align: center;
-    font-size: 50px;
+    font-size: 50px; /* Tamanho grande para o ícone de remover */
     padding: 1px;
     margin: 5px;
-    
 }
 
 .cart-item-remove:hover{
@@ -357,27 +362,27 @@ main {
 
 @keyframes remove {
     100%{
-       color: #ff0000;
-       transform: scale(1.2);
-    }    
+        color: #ff0000;
+        transform: scale(1.2);
+    }
 }
-
-
 
 .cart-item {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Isso pode centralizar o conteúdo do item, talvez ajustar */
+    align-items: center; /* Isso também */
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
+    padding-bottom: 10px; /* Adicionado para consistência com o padding do .cart-items */
+    border-left: 4px solid #25D366; /* Cor diferente por item - mantido do original */
 }
 
 .cart-item-img {
-    width: 80px;
-    height: 80px;
+    width: 80px; /* Original 80px */
+    height: 80px; /* Original 80px */
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 15px;
+    margin-right: 15px; /* Original 15px */
 }
 
 .cart-item-details {
@@ -395,10 +400,12 @@ main {
     margin-bottom: 5px;
 }
 
+/* Controles de quantidade no carrinho */
 .cart-item-quantity {
     display: flex;
     align-items: center;
-    gap: 10px;
+    margin-top: 5px;
+    gap: 10px; /* Original era 10px */
 }
 
 .quantity-btn {
@@ -406,14 +413,26 @@ main {
     height: 25px;
     border-radius: 50%;
     border: 1px solid #ddd;
-    background-color: #f5f5f5;
+    background-color: #e0e0e0; /* Unificado */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-weight: bold; /* Unificado */
+    margin: 0 5px; /* Unificado */
+    transition: background-color 0.3s; /* Unificado */
 }
 
-.remove-item {
+.quantity-btn:hover {
+    background-color: #bdbdbd; /* Unificado */
+}
+
+.quantity-value {
+    min-width: 20px;
+    text-align: center;
+}
+
+.remove-item { /* Esta classe foi usada uma vez e pode ter sido substituída por .cart-item-remove */
     background: none;
     border: none;
     color: var(--cinza);
@@ -522,217 +541,80 @@ footer {
     background-color: #D32F2F; /* Vermelho natalino */
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-
+/* Carrossel */
 .carousel {
-  position: relative;
-  width: 100%;
-  height: 450px; /* altura aproximada do banner da Americanas */
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 6; /* ✅ Mantém o mesmo formato visual da Americanas */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Adicionado shadow de uma das repetições */
+    margin: 20px auto; /* Adicionado margin de uma das repetições */
+    max-width: 1200px; /* Adicionado max-width de uma das repetições */
 }
 
 .slides {
-  display: flex;
-  width: 400%;
-  height: 100%;
-  transition: transform 0.5s ease-in-out;
+    display: flex;
+    width: 400%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out; /* Original era ease, outra cópia tinha ease-in-out */
 }
 
 .slide {
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    min-width: 100%; /* Adicionado de uma das repetições */
 }
 
 .slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Mantém o aspecto proporcional e cobre toda a área */
+    width: 100%;
+    height: 100%; /* Original era 100% e outra cópia tinha auto, mantive 100% */
+    object-fit: cover; /* 🔥 Faz a imagem preencher a caixa sem distorcer */
+    display: block; /* Adicionado de uma das repetições */
 }
 
 .navigation {
-  position: absolute;
-  width: 100%;
-  bottom: 15px;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
+    position: absolute;
+    width: 100%;
+    bottom: 15px; /* Original 15px, outra cópia 10px, mantive 15px */
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    padding: 10px 0; /* Adicionado de uma das repetições */
+    left: 0; /* Adicionado de uma das repetições */
+    right: 0; /* Adicionado de uma das repetições */
 }
 
 .nav-dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 6px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: all 0.3s;
+    height: 12px;
+    width: 12px;
+    margin: 0 6px; /* Original 6px, outra cópia 5px, mantive 6px */
+    background-color: white; /* Original white, outra cópia rgba(255,255,255,0.5) */
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.5; /* Unificado */
+    transition: all 0.3s; /* Unificado */
 }
 
 .nav-dot.active {
-  opacity: 1;
-  background-color: red;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-
-.carousel {
-  position: relative;
-  width: 100%;
-  height: 450px; /* Padrão para desktop */
-  overflow: hidden;
-}
-
-.slides {
-  display: flex;
-  width: 400%;
-  height: 100%;
-  transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.navigation {
-  position: absolute;
-  width: 100%;
-  bottom: 15px;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
-}
-
-.nav-dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 6px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: all 0.3s;
-}
-
-.nav-dot.active {
-  opacity: 1;
-  background-color: red;
-}
-
-/* 📱 Responsividade para telas pequenas */
-@media (max-width: 768px) {
-  .carousel {
-    height: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel {
-    height: 180px;
-  }
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-
-.carousel {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 6; /* ✅ Mantém o mesmo formato visual da Americanas */
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.slides {
-  display: flex;
-  width: 400%;
-  height: 100%;
-  transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 🔥 Faz a imagem preencher a caixa sem distorcer */
-}
-
-.navigation {
-  position: absolute;
-  width: 100%;
-  bottom: 15px;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
-}
-
-.nav-dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 6px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: all 0.3s;
-}
-
-.nav-dot.active {
-  opacity: 1;
-  background-color: red;
+    opacity: 1; /* Unificado */
+    background-color: red; /* Original red, outra cópia var(--amarelo-primario) */
 }
 
 /* 📱 Responsividade */
 @media (max-width: 768px) {
-  .carousel {
-    aspect-ratio: 16 / 7;
-  }
+    .carousel {
+        aspect-ratio: 16 / 7;
+        height: 250px; /* Adicionado do outro media query */
+    }
 }
 
 @media (max-width: 480px) {
-  .carousel {
-    aspect-ratio: 16 / 9;
-  }
+    .carousel {
+        aspect-ratio: 16 / 9;
+        height: 180px; /* Adicionado do outro media query */
+    }
 }
 
 .oferta-relampago {
@@ -762,6 +644,7 @@ body {
     width: 80px !important;
     height: auto;
     animation: pulsar 1.5s infinite;
+    z-index: 2; /* Adicionado do .container-imagem-anuncio .selo-oferta */
 }
 
 /* Animação personalizada */
@@ -885,76 +768,26 @@ body {
     display: block;
 }
 
-/* Carrossel */
+/* Mostrar carrossel apenas na categoria Todos */
 #carrossel-container {
     display: none; /* Inicialmente escondido */
-    margin: 20px auto;
-    max-width: 1200px;
 }
 
-.carousel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.slides {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.slide {
-    min-width: 100%;
-}
-
-.slide img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.navigation {
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-}
-
-.nav-dot {
-    width: 12px;
-    height: 12px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.nav-dot.active {
-    background: var(--amarelo-primario);
-}
-
-/* Mostrar apenas na categoria Todos */
 body.categoria-todos #carrossel-container,
-[data-categoria="todos"] ~ #carrossel-container {
+[data-categoria="todos"] ~ #carrossel-container { /* Esse seletor pode ser um pouco frágil dependendo da estrutura HTML */
     display: block;
 }
 
-/* Estilo base (sempre aplicado) */
+/* Estilo base (sempre aplicado) para oferta especial */
 .oferta-especial {
     position: relative;
     border: 2px solid #FF5252;
+    margin-bottom: 30px; /* Adicionado de uma das repetições */
+    display: none; /* Inicialmente escondido */
 }
 
-.oferta-especial .selo-oferta {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 80px;
-    animation: pulsar 1.5s infinite;
+.oferta-especial .container-imagem-anuncio {
+    position: relative;
 }
 
 /* Esconder em outras categorias */
@@ -965,12 +798,6 @@ body.categoria-todos #carrossel-container,
 /* Mostrar apenas na categoria Todos */
 [data-categoria="todos"] .oferta-especial {
     display: block;
-}
-
-@keyframes pulsar {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
 }
 
 /* Container principal do anúncio */
@@ -1001,6 +828,7 @@ body.categoria-todos #carrossel-container,
     object-fit: cover; /* Garante que a imagem cubra todo o espaço */
     object-position: center;
     transition: transform 0.5s ease;
+    border-radius: 8px; /* Adicionado do .oferta-especial .imagem-anuncio */
 }
 
 /* Efeito hover opcional */
@@ -1008,7 +836,7 @@ body.categoria-todos #carrossel-container,
     transform: scale(1.03);
 }
 
-/* Selo de oferta */
+/* Selo de oferta no anúncio */
 .container-imagem-anuncio .selo-oferta {
     position: absolute;
     top: 20px;
@@ -1018,12 +846,12 @@ body.categoria-todos #carrossel-container,
     animation: pulsar 1.5s infinite;
 }
 
-/* Responsividade */
+/* Responsividade do anúncio */
 @media (max-width: 768px) {
     .container-imagem-anuncio {
         padding-bottom: 40%; /* Proporção maior em mobile */
     }
-    
+
     .container-imagem-anuncio .selo-oferta {
         width: 60px;
         top: 10px;
@@ -1033,52 +861,27 @@ body.categoria-todos #carrossel-container,
 
 /* Botão Limpar Carrinho */
 .clear-cart-btn {
-    background-color: #f44336;
+    background-color: #f44336; /* Unificado */
     color: white;
     border: none;
-    padding: 10px;
-    margin: 0 20px 10px;
+    padding: 15px; /* Unificado para 15px */
+    margin-top: 10px; /* Adicionado para ser consistente */
+    margin-left: 0; /* Garantir que não tenha margem lateral */
     border-radius: 5px;
     cursor: pointer;
     display: flex;
-    width: 100%;
+    width: 100%; /* Garantir largura total quando em um contexto de coluna, como no carrinho */
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s;
 }
 
 .clear-cart-btn:hover {
-    background-color: #d32f2f;
+    background-color: #ff0000; /* Unificado */
 }
 
 .clear-cart-btn i {
     margin-right: 8px;
-}
-
-/* Controles de quantidade no carrinho */
-.cart-item-quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-}
-
-.quantity-btn {
-    background-color: #e0e0e0;
-    border: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 0 5px;
-}
-
-.quantity-value {
-    min-width: 20px;
-    text-align: center;
 }
 
 /* Notificações */
@@ -1127,143 +930,20 @@ body.categoria-todos #carrossel-container,
     }
 }
 
-/* Botão Limpar Carrinho */
-.clear-cart-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 15px;
-    margin-top: 10px;
-    margin-left: 0;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
-}
-
-.clear-cart-btn:hover {
-    background-color: #ff0000;
-}
-
-.clear-cart-btn i {
-    margin-right: 8px;
-}
-
-/* Controles de quantidade no carrinho */
-.cart-item-quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-}
-
-.quantity-btn {
-    background-color: #e0e0e0;
-    border: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 0 5px;
-    transition: background-color 0.3s;
-}
-
-.quantity-btn:hover {
-    background-color: #bdbdbd;
-}
-
-.quantity-value {
-    min-width: 20px;
-    text-align: center;
-}
-
-/* Estilo para a oferta especial */
-.oferta-especial {
-    margin-bottom: 30px;
-    position: relative;
-    display: none; /* Inicialmente escondido */
-}
-
-.oferta-especial .container-imagem-anuncio {
-    position: relative;
-}
-
-.imagem-anuncio {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.selo-oferta {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 80px;
-    height: auto;
-}
-
+/* Contêiner do Carrinho de Compras */
 .cart-container {
-  padding: 20px;
+    padding: 20px;
 }
 
 .cart-items {
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.cart-item {
-  display: flex;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-.cart-item-img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.close-cart {
-  background: none;
-  border: none;
-  font-size: 24px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 .cart-icon {
-  position: relative;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
 }
-
-.cart-count {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: red;
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-}
-
-.cart-item {
-    border-left: 4px solid #25D366; /* Cor diferente por item */
-    margin-bottom: 10px;
-}
-

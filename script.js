@@ -132,6 +132,7 @@ const Products = {
 const filtroPorCategoria = {
 
         btnActive : document.getElementsByClassName('active'),
+        sectionCategoria : document.getElementsByClassName('categoria-produtos'),
 
         removerActive() {
             for ( const btnRemove of this.btnActive){
@@ -139,7 +140,22 @@ const filtroPorCategoria = {
             }
         },
 
-        adicionarActive(e) { e.target.classList.add('active')},
+        adicionarActive(e) {
+            e.target.classList.add('active');
+            const dataCategoriaFiltro = e.target.getAttribute('data-categoria');
+            
+            for(const sectionCategoriaArray of this.sectionCategoria){
+                if(sectionCategoriaArray.getAttribute('data-categoria') === dataCategoriaFiltro){
+                    sectionCategoriaArray.style.display = 'block';
+                    console.log(sectionCategoriaArray.style.display)
+                }else{
+                     sectionCategoriaArray.style.display = 'none';
+                    }
+             }
+
+        },
+
+
 }
 
 // ========================== MAIN ==========================
