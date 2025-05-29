@@ -134,8 +134,9 @@ const filtroPorCategoria = {
         btnActive : document.getElementsByClassName('active'),
 
         removerActive() {
-            console.log(this.btnActive[0]);
-            this.btnActive.classList.remove('active');
+            for ( const btnRemove of this.btnActive){
+                btnRemove.classList.remove('active');
+            }
         },
 
         adicionarActive(e) { e.target.classList.add('active')},
