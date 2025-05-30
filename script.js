@@ -1,7 +1,9 @@
 // ========================== CART MODULE ==========================
+// Módulo para gerenciar o carrinho de compras
 const Cart = {
 	items: JSON.parse(localStorage.getItem("cart")) || [],
 
+	// Adiciona um produto ao carrinho
 	add(product) {
 		const existing = this.items.find((item) => item.id === product.id);
 		if (existing) {
@@ -13,11 +15,13 @@ const Cart = {
 		this.save();
 	},
 
+	// Remove um item do carrinho pelo ID
 	remove(id) {
 		this.items = this.items.filter((item) => item.id !== id);
 		this.save();
 	},
 
+	// Ajusta a quantidade de um item no carrinho
 	adjustQuantity(id, delta) {
 		const item = this.items.find((i) => i.id === id);
 		if (item) {
@@ -27,6 +31,7 @@ const Cart = {
 		}
 	},
 
+	//Limpa o carrinho e exibe uma mensagem de confirmação
 	clear() {
 		if (confirm("Tem certeza que deseja limpar seu carrinho?")) {
 			this.items = [];
@@ -35,16 +40,19 @@ const Cart = {
 		}
 	},
 
+	// Retorna o número total de itens no carrinho
 	totalItems() {
 		return this.items.reduce((sum, i) => sum + i.quantity, 0);
 	},
 
+	// Retorna o preço total do carrinho formatado
 	totalPrice() {
 		return this.items
 			.reduce((sum, i) => sum + i.price * i.quantity, 0)
 			.toFixed(2);
 	},
 
+	// Salva o carrinho no localStorage e atualiza a interface
 	save() {
 		localStorage.setItem("cart", JSON.stringify(this.items));
 		UI.updateCart();
@@ -52,6 +60,7 @@ const Cart = {
 };
 
 // ========================== UI MODULE ==========================
+// Módulo para gerenciar a interface do usuário
 const UI = {
 	cartCount: document.querySelector(".cart-count"),
 	cartItems: document.getElementById("cart-items"),
@@ -59,6 +68,7 @@ const UI = {
 	cartOverlay: document.getElementById("cart-overlay"),
 	clearBtn: document.getElementById("clear-cart"),
 
+	// Atualiza o carrinho na interface
 	updateCart() {
 		this.cartCount.textContent = Cart.totalItems();
 		this.cartTotal.textContent = `R$ ${Cart.totalPrice()}`;
@@ -73,7 +83,6 @@ const UI = {
 		}
 
 		this.clearBtn.style.display = "block";
-
 		Cart.items.forEach((item) => {
 			const div = document.createElement("div");
 			div.className = "cart-item";
@@ -100,6 +109,7 @@ const UI = {
 		});
 	},
 
+	// Exibe uma notificação na tela
 	notify(msg, type) {
 		const note = document.createElement("div");
 		note.className = `notification ${type}`;
@@ -110,13 +120,17 @@ const UI = {
 };
 
 // ========================== PRODUCTS MODULE ==========================
+// Módulo para carregar e exibir produtos
 const Products = {
 	load() {
+		// Verifica se já existem produtos no localStorage
 		const prods = JSON.parse(localStorage.getItem("produtos")) || [];
 		prods.forEach((prod) => {
 			const section = document.querySelector(
 				`[data-categoria="${prod.categoria}"] .produtos-grid`
 			);
+
+			// Se a seção não existir, cria uma nova
 			if (section) {
 				section.innerHTML += `
                     <div class="produto-card">
@@ -138,17 +152,19 @@ const Products = {
 };
 
 //========================= FILTRO POR CATEGORIA ======================
-
+// Módulo para filtrar produtos por categoria
 const filtroPorCategoria = {
 	btnActive: document.getElementsByClassName("active"),
 	sectionCategoria: document.getElementsByClassName("categoria-produtos"),
 
+	// Remove a classe "active" de todos os botões de filtro
 	removerActive() {
 		for (const btnRemove of this.btnActive) {
 			btnRemove.classList.remove("active");
 		}
 	},
 
+	// Adiciona a classe "active" ao botão clicado e filtra as seções de produtos
 	adicionarActive(e) {
 		e.target.classList.add("active");
 		const dataCategoriaFiltro = e.target.getAttribute("data-categoria");
@@ -168,6 +184,7 @@ const filtroPorCategoria = {
 };
 
 // ========================== MAIN ==========================
+// Inicializa o carrinho e a interface quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", () => {
 	Products.load();
 	UI.updateCart();
@@ -201,6 +218,58 @@ document.addEventListener("DOMContentLoaded", () => {
 			Cart.adjustQuantity(id, -1);
 		}
 	});
+
+	document.getElementById("checkout-btn").addEventListener("click", () => {
+		// Captura os dados do cliente
+		const nome = document.getElementById("cliente-nome").value.trim();
+		const endereco = document.getElementById("cliente-endereco").value.trim();
+		const telefone = document.getElementById("cliente-telefone").value.trim();
+		const observacoes = document
+			.getElementById("cliente-observacoes")
+			.value.trim();
+
+		// Valida os dados do cliente
+		if (!nome || !endereco || !telefone) {
+			alert("Por favor, preencha nome, endereço e telefone.");
+			return;
+		}
+		// Valida o telefone
+		if (Cart.items.length === 0) {
+			alert("Seu carrinho está vazio.");
+			return;
+		}
+
+		// Monta a mensagem para o WhatsApp
+		let mensagem = `📦 *Pedido via site*\n\n`;
+		mensagem += `👤 *Nome:* ${nome}\n`;
+		mensagem += `🏠 *Endereço:* ${endereco}\n`;
+		mensagem += `📱 *WhatsApp:* ${telefone}\n`;
+		mensagem += `📝 *Observações:* ${observacoes || "Nenhuma"}\n\n`;
+		mensagem += `🛒 *Itens do Pedido:*\n`;
+
+		// Lista os itens do carrinho
+		Cart.items.forEach((item, index) => {
+			const subtotal = (item.price * item.quantity)
+				.toFixed(2)
+				.replace(".", ",");
+			mensagem += `\n${index + 1}. ${item.name} (ID: ${item.id})\nQtd: ${
+				item.quantity
+			} - R$ ${subtotal}`;
+		});
+
+		const total = parseFloat(Cart.totalPrice()).toFixed(2).replace(".", ",");
+		mensagem += `\n\n💰 *Total:* R$ ${total}`;
+
+		// Número da loja - ajuste aqui com o seu número real
+		const numeroLoja = "5521988304627"; // Exemplo com DDI + DDD + número
+		const url = `https://wa.me/${numeroLoja}?text=${encodeURIComponent(
+			mensagem
+		)}`;
+
+		window.open(url, "_blank");
+	});
+
+	// Filtro por categoria
 	document
 		.getElementById("filtroPorCategoria")
 		.addEventListener("click", () => filtroPorCategoria.removerActive());
@@ -208,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		.getElementById("filtroPorCategoria")
 		.addEventListener("click", (e) => filtroPorCategoria.adicionarActive(e));
 
+	// Eventos do carrinho
 	document
 		.getElementById("open-cart")
 		.addEventListener("click", () => UI.cartOverlay.classList.add("active"));
