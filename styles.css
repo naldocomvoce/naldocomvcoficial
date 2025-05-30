@@ -79,6 +79,17 @@ header {
 	margin: 0;
 }
 
+/*banner*/
+ #banner{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height:300px ;
+	width: 100%;
+	background-color:rgba(250, 216, 106, 0.411);;
+	margin-top: 3%;
+ }
+
 /* Navegação */
 nav {
 	display: flex;
