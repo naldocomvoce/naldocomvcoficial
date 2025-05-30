@@ -64,6 +64,13 @@ header {
 	padding: 0;
 }
 
+.logo:hover{
+	animation: logoHouver 1s forwards 100ms;
+}
+@keyframes logoHouver {
+	100%{ transform: scale(1.1)}
+}
+
 .whatsAppECarrinho {
 	width: 30%;
 	display: flex;

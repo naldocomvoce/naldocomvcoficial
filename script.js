@@ -220,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	document.getElementById("checkout-btn").addEventListener("click", () => {
+
 		// Captura os dados do cliente
 		const nome = document.getElementById("cliente-nome").value.trim();
 		const endereco = document.getElementById("cliente-endereco").value.trim();
