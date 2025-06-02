@@ -84,10 +84,14 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height:300px ;
+	max-height:300px ;
 	width: 100%;
-	background-color:rgba(250, 216, 106, 0.411);;
+	background-color:rgb(233, 47, 47);;
 	margin-top: 3%;
+ }
+
+ #banner img{
+	width: auto;
  }
 
 /* Navegação */
