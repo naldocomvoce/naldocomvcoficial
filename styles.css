@@ -1,6 +1,6 @@
 :root {
 	--amarelo-primario: #ffd700;
-	--amarelo-secundario: #ffeb3b;
+	--amarelo-secundario: #c7a200;
 	--vermelho-primario: #e53935;
 	--vermelho-secundario: #f44336;
 	--branco: #ffffff;
@@ -29,7 +29,7 @@ a {
 }
 
 body {
-	background-color: #f9f9f9;
+	background-color: #ffffff;
 	color: var(--preto);
 }
 
@@ -539,17 +539,6 @@ footer {
 }
 
 
-/* Carrossel */
-.carousel {
-	position: relative;
-	width: 100%;
-	aspect-ratio: 16 / 6; /* ✅ Mantém o mesmo formato visual da Americanas */
-	overflow: hidden;
-	border-radius: 10px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adicionado shadow de uma das repetições */
-	margin: 20px auto; /* Adicionado margin de uma das repetições */
-	max-width: 1200px; /* Adicionado max-width de uma das repetições */
-}
 
 .slides {
 	display: flex;
