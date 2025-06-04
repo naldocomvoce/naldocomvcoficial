@@ -219,37 +219,7 @@ nav {
 	color: white;
 }
 
-/* Subcategorias */
-.subcategorias {
-	display: none;
-	padding: 10px 5%;
-	gap: 10px;
-	background-color: #f5f5f5;
-	border-top: 1px solid #ddd;
-	flex-wrap: wrap;
-}
 
-.subcategorias.active {
-	display: flex;
-}
-
-.subcategoria-btn {
-	padding: 6px 12px;
-	border-radius: 15px;
-	background-color: #e0e0e0;
-	border: none;
-	cursor: pointer;
-	white-space: nowrap;
-	transition: all 0.3s;
-	font-size: 14px;
-	margin: 5px;
-}
-
-.subcategoria-btn:hover,
-.subcategoria-btn.active {
-	background-color: var(--amarelo-primario);
-	color: var(--preto);
-}
 
 /* Conteúdo Principal */
 main {
@@ -265,12 +235,6 @@ main {
 	color: var(--vermelho-primario);
 }
 
-.subcategoria-titulo {
-	margin: 20px 0 15px;
-	padding-left: 10px;
-	color: var(--preto);
-	font-size: 1.2rem;
-}
 
 .produtos-grid {
 	display: grid;
@@ -574,15 +538,6 @@ footer {
 	margin-left: 10px;
 }
 
-/* Destaque para categorias especiais */
-[data-subcategoria="frete-gratis"] .produto-preco {
-	color: #2e7d32;
-	font-weight: bold;
-}
-
-[data-subcategoria="natal"] .produto-categoria {
-	background-color: #d32f2f; /* Vermelho natalino */
-}
 
 /* Carrossel */
 .carousel {
@@ -1003,3 +958,4 @@ body.categoria-todos #carrossel-container,
 	font-size: 24px;
 	cursor: pointer;
 }
+

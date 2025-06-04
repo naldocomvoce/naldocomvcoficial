@@ -288,3 +288,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	UI.clearBtn.addEventListener("click", () => Cart.clear());
 });
+
