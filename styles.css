@@ -33,6 +33,13 @@ body {
 	color: var(--preto);
 }
 
+/*Responsividade*/
+@media (max-width: 600px){
+	body{
+		background-color: #212121;
+	}
+}
+
 /* Cabeçalho */
 header {
 	position: fixed;
@@ -86,7 +93,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	left: -5%;
-	margin-top: 3%;
+	margin-top: 17%;
 	width: 110%;
 	max-height:300px ;
 	display: flex;
@@ -96,7 +103,7 @@ header {
  }
 
  #banner img{
-	width: auto;
+	width: 100%;
  }
 
 /* Navegação */
@@ -229,7 +236,6 @@ nav {
 /* Conteúdo Principal */
 main {
 	position: relative;
-	top: 145px;
 	padding: 40px 5%;
 }
 
@@ -985,3 +991,5 @@ body.categoria-todos #carrossel-container,
         opacity: 0;
     }
 }
+
+
