@@ -81,13 +81,18 @@ header {
 
 /*banner*/
  #banner{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	left: -5%;
+	margin-top: 3%;
+	width: 110%;
+	max-height:300px ;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	max-height:300px ;
-	width: 100%;
-	background-color:rgb(233, 47, 47);;
-	margin-top: 3%;
+	background-color:#e92f2f;;
  }
 
  #banner img{
