@@ -289,3 +289,31 @@ document.addEventListener("DOMContentLoaded", () => {
 	UI.clearBtn.addEventListener("click", () => Cart.clear());
 });
 
+
+
+    const heartsArea = document.querySelector('.valentines-hearts-area');
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '❤️';
+        
+        // Posição aleatória em toda a área
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+
+        // Tamanho aleatório
+        const size = Math.random() * 15 + 15; // entre 15px e 30px
+        heart.style.fontSize = size + 'px';
+        
+        heartsArea.appendChild(heart);
+        
+        // Remove após animação
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }
+
+    // Cria coração a cada 300ms
+    setInterval(createHeart, 300);
+
