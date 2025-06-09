@@ -35,7 +35,9 @@ body {
 
 /*Responsividade*/
 @media (max-width: 600px){
+
 	.logo-containe{
+
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -43,16 +45,39 @@ body {
 		align-items: center;
 	}
 	.logo{
-		width: 50%;
+		position: relative;
+		right: 5%;
+		width: 70%;
+
 	}
 	header{
 		position: fixed;
 		top: 0;
 		height: 15%;
+		width: 90%;
 		display: flex;
 		flex-direction: column;
 	}
 	header .valentines-hearts-area{
+		display: none;
+	}
+	.whatsAppECarrinho{
+		position: absolute;
+		top: 95vh;
+		right: 10vw;
+		bottom: 10vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.whatsapp-btn{
+		font-size: 1vh;
+		padding: 0%;
+		margin-bottom: 10%;
+		border-radius: 50%;
+	}
+	.fab p{
 		display: none;
 	}
 	#banner{
@@ -62,6 +87,8 @@ body {
 	.categorias{
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
 	}
 
 }
