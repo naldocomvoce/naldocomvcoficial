@@ -1045,4 +1045,30 @@ body.categoria-todos #carrossel-container,
     }
 }
 
+ .meu-botao {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(to right, #FFD700, #FF4500);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .meu-botao:hover {
+            background: linear-gradient(to right, #FFA500, #FF0000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .meu-botao:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
